@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { GithubService } from './services/github.service';
 import { HeaderComponent } from './components/header/header.component';
 import { RepositoriesComponent } from './components/repositories/repositories.component';
+import { RepoCardComponent } from './components/repo-card/repo-card.component';
 
 const routes: Routes = [
   { path: '', component: RepositoriesComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    RepositoriesComponent
+    RepositoriesComponent,
+    RepoCardComponent
   ],
   imports: [
     BrowserModule,

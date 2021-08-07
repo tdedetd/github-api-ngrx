@@ -8,10 +8,25 @@
 }
 
 .repos__result {
-  margin-left: 21em;
+  margin-left: 20em;
 }
 
 .repos-filters {
   background: white;
   height: 100%;
+}
+
+.repos-list {
+  max-width: 70em;
+  margin: 0 auto;
+  padding: 1.5em;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.repos-list__item {
+  margin: .5em;
+  width: 17em;
 }

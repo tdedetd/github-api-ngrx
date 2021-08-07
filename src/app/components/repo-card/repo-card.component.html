@@ -1,0 +1,19 @@
+<div class="repo">
+  <header class="repo__header" [title]="repo.name">{{ repo.name }}</header>
+  <div class="repo__description" [title]="repo.description || ''">{{ repo.description || noDescriptionText }}</div>
+  <div class="repo__lang">{{ repo.language }}</div>
+  <footer class="repo__footer">
+    <div>
+      <span class="repo__stat repo__stars" title="Stars"></span>
+      <span>{{ repo.stargazers_count }}</span>
+    </div>
+    <div>
+      <span class="repo__stat repo__forks" title="Forks"></span>
+      <span>{{ repo.forks }}</span>
+    </div>
+    <div>
+      <span class="repo__stat repo__user" title="Owner"></span>
+      <span>{{ repo?.owner?.login }}</span>
+    </div>
+  </footer>
+</div>

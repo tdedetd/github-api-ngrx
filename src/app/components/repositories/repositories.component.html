@@ -2,5 +2,11 @@
   <div class="repos__filters">
     <div class="repos-filters"></div>
   </div>
-  <div class="repos__result"></div>
+  <div class="repos__result">
+    <ul class="repos-list">
+      <li *ngFor="let repo of repos$ | async" class="repos-list__item">
+        <gan-repo-card [repo]="repo"></gan-repo-card>
+      </li>
+    </ul>
+  </div>
 </div>

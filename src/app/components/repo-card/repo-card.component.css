@@ -1,0 +1,56 @@
+.repo {
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 0 3px #aaa;
+  padding: .75em;
+  color: #555;
+  width: 100%;
+}
+
+.repo__header {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin-bottom: .5em;
+}
+
+.repo__description {
+  --max-lines: 3;
+  --line-hight: 1em;
+  position: relative;
+  line-height: var(--line-hight);
+  height: calc(var(--max-lines) * var(--line-hight));
+  font-size: .75em;
+  margin-bottom: .5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo__lang {
+  line-height: 1em;
+  height: 1em;
+  margin-bottom: .7em;
+}
+
+.repo__footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: .75em;
+}
+
+.repo__stat::after {
+  content: ': ';
+}
+
+.repo__stars::before {
+  content: '\2605';
+}
+
+.repo__forks::before {
+  content: '\2442';
+}
+
+.repo__user::before {
+  content: '\263a';
+}

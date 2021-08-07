@@ -12,4 +12,5 @@ export interface Repository {
   forks: number;
   open_issues: number;
   watchers: number;
+  stargazers_count: number;
 }

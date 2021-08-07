@@ -4,6 +4,7 @@
   padding: .7em 1em;
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 .title {
