@@ -1,0 +1,17 @@
+.repos__filters {
+  box-sizing: border-box;
+  float: left;
+  width: 20em;
+  padding: 1.5em;
+  height: calc(100vh - 3.7em);
+  position: fixed;
+}
+
+.repos__result {
+  margin-left: 21em;
+}
+
+.repos-filters {
+  background: white;
+  height: 100%;
+}

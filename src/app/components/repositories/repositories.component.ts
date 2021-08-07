@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'gan-repositories',
   templateUrl: './repositories.component.html',
-  styleUrls: ['./repositories.component.css']
+  styleUrls: ['./repositories.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RepositoriesComponent implements OnInit {
 
