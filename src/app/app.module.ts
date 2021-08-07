@@ -1,17 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { GithubService } from './services/github.service';
+import { HeaderComponent } from './components/header/header.component';
+import { RepositoriesComponent } from './components/repositories/repositories.component';
+
+const routes: Routes = [
+  { path: '', component: RepositoriesComponent },
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    RepositoriesComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     GithubService

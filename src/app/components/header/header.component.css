@@ -1,0 +1,18 @@
+.header {
+  background-color: black;
+  color: white;
+  padding: .7em 1em;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Arial Narrow', Arial, Helvetica, sans-serif;
+}
+
+.title__a {
+  text-decoration: none;
+}
+
+.title__a:visited {
+  color: inherit;
+}
