@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,8 @@ import { selectLoadMore, selectRepositories } from 'src/app/store/repo.selectors
   selector: 'gan-repositories',
   templateUrl: './repositories.component.html',
   styleUrls: ['./repositories.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class RepositoriesComponent implements OnInit {
 

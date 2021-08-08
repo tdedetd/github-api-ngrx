@@ -40,7 +40,7 @@
 
 .load-more-container__btn {
   border: none;
-  background: black;
+  background: #313131;
   color: white;
   font-size: 1em;
   padding: .5em 1em;
@@ -49,5 +49,5 @@
 }
 
 .load-more-container__btn:hover {
-  background: #2e2e2e;
+  background: #3b3b3b;
 }

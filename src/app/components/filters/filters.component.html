@@ -1,0 +1,33 @@
+<div class="filters">
+  <div class="filters__item filters-item">
+    <div class="filters-item__header">Name</div>
+    <div class="filters-item__body">
+      <input type="text" class="filters-item__w-100" [(ngModel)]="name" (ngModelChange)="onNameChange($event)">
+    </div>
+  </div>
+  <div class="filters__item filters-item">
+    <div class="filters-item__header">Sort by</div>
+    <div class="filters-item__body">
+      <select class="filters-item__w-100">
+        <option value="">Default</option>
+        <option value="stars">Stars</option>
+        <option value="forks">Forks</option>
+        <option value="help-wanted-issues">Open issues</option>
+        <option value="updated">Updated</option>
+      </select>
+    </div>
+  </div>
+  <div class="filters__item filters-item">
+    <div class="filters-item__header">Sort direction</div>
+    <div class="filters-item__body">
+      <label>
+        <input type="radio" [name]="orderName">
+        <span>Ascending</span>
+      </label>
+      <label>
+        <input type="radio" [name]="orderName">
+        <span>Descending</span>
+      </label>
+    </div>
+  </div>
+</div>

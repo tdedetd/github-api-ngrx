@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -12,6 +13,7 @@ import { RepositoriesComponent } from './components/repositories/repositories.co
 import { RepoCardComponent } from './components/repo-card/repo-card.component';
 import { RepoEffects } from './store/repo.effects';
 import { reducers } from './store';
+import { FiltersComponent } from './components/filters/filters.component';
 
 const routes: Routes = [
   { path: '', component: RepositoriesComponent },
@@ -22,11 +24,13 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent,
     RepositoriesComponent,
-    RepoCardComponent
+    RepoCardComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([RepoEffects])

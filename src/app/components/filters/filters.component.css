@@ -1,0 +1,23 @@
+.filters {
+  height: 100%;
+}
+
+.filters__item {
+  margin-bottom: 2em;
+}
+
+.filters-item__header {
+  background-color: #313131;
+  color: white;
+  padding: .2em .7em;
+  margin-bottom: .5em;
+}
+
+.filters-item__body {
+  margin: 1em;
+}
+
+.filters-item__w-100 {
+  width: 100%;
+  box-sizing: border-box;
+}
