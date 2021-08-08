@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Repository } from 'src/app/models/repository';
 import { LoadRepositories } from 'src/app/store/repo.actions';
-import { selectRepositories } from 'src/app/store/repo.selectors';
+import { selectLoadMore, selectRepositories } from 'src/app/store/repo.selectors';
 
 @Component({
   selector: 'gan-repositories',
@@ -14,13 +14,24 @@ import { selectRepositories } from 'src/app/store/repo.selectors';
 })
 export class RepositoriesComponent implements OnInit {
 
+  loadMore$: Observable<boolean>;
+
   repos$: Observable<Repository[]>;
 
   constructor(private store: Store) { }
 
   ngOnInit() {
-    this.store.dispatch(new LoadRepositories());
+    this.loadMore$ = this.store.select(selectLoadMore);
     this.repos$ = this.store.select(selectRepositories);
+    this.loadRepos();
+  }
+
+  onLoadMoreButtonClick() {
+    this.loadRepos();
+  }
+
+  private loadRepos() {
+    this.store.dispatch(new LoadRepositories());
   }
 
 }

@@ -21,6 +21,7 @@
   max-width: 70em;
   margin: 0 auto;
   padding: 1.5em;
+  padding-bottom: 0;
   list-style: none;
   display: flex;
   justify-content: center;
@@ -30,4 +31,23 @@
 .repos-list__item {
   margin: .5em;
   width: 17em;
+}
+
+.load-more-container {
+  text-align: center;
+  margin-bottom: .5em;
+}
+
+.load-more-container__btn {
+  border: none;
+  background: black;
+  color: white;
+  font-size: 1em;
+  padding: .5em 1em;
+  border-radius: .4em;
+  cursor: pointer;
+}
+
+.load-more-container__btn:hover {
+  background: #2e2e2e;
 }

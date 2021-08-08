@@ -8,5 +8,8 @@
         <gan-repo-card [repo]="repo"></gan-repo-card>
       </li>
     </ul>
+    <div *ngIf="loadMore$ | async" class="load-more-container">
+      <button class="load-more-container__btn" (click)="onLoadMoreButtonClick()">Load more</button>
+    </div>
   </div>
 </div>
