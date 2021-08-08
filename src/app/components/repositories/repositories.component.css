@@ -12,7 +12,8 @@
 }
 
 .repos-filters {
-  background: white;
+  background: white;  
+  box-shadow: 0 0 3px #aaa;
   height: 100%;
 }
 
