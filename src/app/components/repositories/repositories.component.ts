@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { pluck } from 'rxjs/operators';
 
 import { Repository } from 'src/app/models/repository';
-import { GithubService } from 'src/app/services/github.service';
+import { LoadRepositories } from 'src/app/store/repo.actions';
+import { selectRepositories } from 'src/app/store/repo.selectors';
 
 @Component({
   selector: 'gan-repositories',
@@ -15,12 +16,11 @@ export class RepositoriesComponent implements OnInit {
 
   repos$: Observable<Repository[]>;
 
-  constructor(private github: GithubService) { }
+  constructor(private store: Store) { }
 
   ngOnInit() {
-    this.repos$ = this.github.getRepositories({ q: 'angular' }).pipe(
-      pluck('items')
-    );
+    this.store.dispatch(new LoadRepositories());
+    this.repos$ = this.store.select(selectRepositories);
   }
 
 }
