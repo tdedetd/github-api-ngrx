@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@ngrx/effects": "^12.3.0",
+    "@ngrx/store": "^12.3.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
