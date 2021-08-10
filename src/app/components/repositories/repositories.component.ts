@@ -3,8 +3,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Repository } from 'src/app/models/repository';
-import { LoadRepositories } from 'src/app/store/repo.actions';
-import { selectLoadMore, selectRepositories } from 'src/app/store/repo.selectors';
+import { SearchReposFilters } from 'src/app/models/search-repos-filters';
+import { LoadRepositories, SetFilters } from 'src/app/store/repo.actions';
+import { selectFilters, selectLoadMore, selectRepositories } from 'src/app/store/repo.selectors';
 
 @Component({
   selector: 'gan-repositories',
@@ -15,6 +16,8 @@ import { selectLoadMore, selectRepositories } from 'src/app/store/repo.selectors
 })
 export class RepositoriesComponent implements OnInit {
 
+  filters$: Observable<SearchReposFilters>;
+
   loadMore$: Observable<boolean>;
 
   repos$: Observable<Repository[]>;
@@ -24,7 +27,12 @@ export class RepositoriesComponent implements OnInit {
   ngOnInit() {
     this.loadMore$ = this.store.select(selectLoadMore);
     this.repos$ = this.store.select(selectRepositories);
+    this.filters$ = this.store.select(selectFilters);
     this.loadRepos();
+  }
+
+  onFiltersChange(filters: SearchReposFilters) {
+    this.store.dispatch(new SetFilters(filters));
   }
 
   onLoadMoreButtonClick() {

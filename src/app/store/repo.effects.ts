@@ -5,7 +5,7 @@ import { map, switchMap, withLatestFrom } from "rxjs/operators";
 
 import { AppState } from ".";
 import { GithubService } from "../services/github.service";
-import { ERepoActions, LoadRepositoriesSuccess } from "./repo.actions";
+import { ERepoActions, LoadRepositories, LoadRepositoriesSuccess } from "./repo.actions";
 
 @Injectable()
 export class RepoEffects {
@@ -21,9 +21,12 @@ export class RepoEffects {
       per_page: repoState.perPage,
       page: repoState.nextPage
     })),
-    map(data => {
-      return new LoadRepositoriesSuccess({ repos: data.items, total: data.total_count });
-    })
+    map(data => new LoadRepositoriesSuccess({ repos: data.items, total: data.total_count }))
+  ));
+
+  setFilters$ = createEffect(() => this.actions$.pipe(
+    ofType(ERepoActions.SetFilters),
+    map(_ => new LoadRepositories())
   ));
 
   constructor(private actions$: Actions,

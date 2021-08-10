@@ -1,7 +1,7 @@
 <div class="repos">
   <div class="repos__filters">
     <div class="repos-filters">
-      <gan-filters></gan-filters>
+      <gan-filters [filters]="filters$ | async" (filtersChange)="onFiltersChange($event)"></gan-filters>
     </div>
   </div>
   <div class="repos__result">

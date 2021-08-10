@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import { SearchReposFilters } from 'src/app/models/search-repos-filters';
 import { SearchRepoOrder, SearchRepoSort } from 'src/app/types';
 
@@ -13,41 +16,46 @@ export class FiltersComponent implements OnInit {
 
   @Input() filters: SearchReposFilters;
 
-  name: string;
+  @Output() filtersChange: EventEmitter<SearchReposFilters> = new EventEmitter();
 
-  orderName: string;
+  readonly orderName: string;
 
-  sort: string;
-
-  order: string;
+  private value$: Subject<SearchReposFilters> = new Subject();
 
   constructor() {
+    this.orderName = 'order' + String(new Date().getTime());
     this.filters = this.filters || {
       query: '',
       sort: '',
       order: 'desc'
     };
-
-    this.name = this.filters.query;
-    this.order = this.filters.order;
-    this.sort = this.filters.sort;
-
-    this.orderName = 'order' + String(new Date().getTime());
   }
 
   ngOnInit(): void {
+    this.value$.pipe(
+      debounceTime(300)
+    ).subscribe(filters => this.filtersChange.emit(filters));
   }
 
   onNameChange(value: string) {
-    console.log('onNameChange', value);
+    this.value$.next({
+      ...this.filters,
+      query: value
+    });
   }
 
   onSortChange(value: SearchRepoSort) {
-    console.log('onSortChange', value);
+    this.value$.next({
+      ...this.filters,
+      sort: value
+    });
   }
 
   selectOrder(value: SearchRepoOrder) {
-    console.log('selectOrder', value);
+    this.value$.next({
+      ...this.filters,
+      order: value
+    });
   }
 
 }

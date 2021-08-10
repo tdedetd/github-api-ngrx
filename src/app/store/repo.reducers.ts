@@ -12,7 +12,7 @@ export interface RepoState {
 
 export const initialRepoState: RepoState = {
   filters: {
-    query: 'angular',
+    query: '',
     sort: '',
     order: 'desc'
   },
@@ -36,6 +36,14 @@ export const repoReducer = (
         repositories
       };
     }
+    case ERepoActions.SetFilters:
+      return {
+        ...state,
+        filters: action.payload,
+        loadMore: false,
+        nextPage: 1,
+        repositories: []
+      }
   }
 
   return state;
