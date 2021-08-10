@@ -19,3 +19,8 @@ export const selectFilters = createSelector(
   selectRepo,
   (state: RepoState) => state.filters
 );
+
+export const selectTotal = createSelector(
+  selectRepo,
+  (state: RepoState) => state.total
+);

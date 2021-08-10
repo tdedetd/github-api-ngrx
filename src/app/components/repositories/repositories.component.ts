@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Repository } from 'src/app/models/repository';
 import { SearchReposFilters } from 'src/app/models/search-repos-filters';
-import { LoadRepositories, SetFilters } from 'src/app/store/repo.actions';
-import { selectFilters, selectLoadMore, selectRepositories } from 'src/app/store/repo.selectors';
+import { HideLoadMore, LoadRepositories, SetFilters } from 'src/app/store/repo.actions';
+import { selectFilters, selectLoadMore, selectRepositories, selectTotal } from 'src/app/store/repo.selectors';
 
 @Component({
   selector: 'gan-repositories',
@@ -18,20 +19,30 @@ export class RepositoriesComponent implements OnInit {
 
   filters$: Observable<SearchReposFilters>;
 
+  loading = false;
+
   loadMore$: Observable<boolean>;
 
   repos$: Observable<Repository[]>;
 
+  total$: Observable<number>;
+
   constructor(private store: Store) { }
 
   ngOnInit() {
+    this.repos$ = this.store.select(selectRepositories).pipe(
+      tap(_ => this.loading = false)
+    );
+
     this.loadMore$ = this.store.select(selectLoadMore);
-    this.repos$ = this.store.select(selectRepositories);
     this.filters$ = this.store.select(selectFilters);
+    this.total$ = this.store.select(selectTotal);
     this.loadRepos();
   }
 
   onFiltersChange(filters: SearchReposFilters) {
+    this.loading = true;
+    this.store.dispatch(new HideLoadMore());
     this.store.dispatch(new SetFilters(filters));
   }
 
@@ -40,6 +51,8 @@ export class RepositoriesComponent implements OnInit {
   }
 
   private loadRepos() {
+    this.loading = true;
+    this.store.dispatch(new HideLoadMore());
     this.store.dispatch(new LoadRepositories());
   }
 

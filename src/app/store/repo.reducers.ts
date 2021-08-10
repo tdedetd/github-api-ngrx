@@ -8,6 +8,7 @@ export interface RepoState {
   nextPage: number;
   perPage: number;
   repositories: Repository[];
+  total: number;
 }
 
 export const initialRepoState: RepoState = {
@@ -19,7 +20,8 @@ export const initialRepoState: RepoState = {
   loadMore: false,
   nextPage: 1,
   perPage: 30,
-  repositories: []
+  repositories: [],
+  total: 0
 };
 
 export const repoReducer = (
@@ -33,7 +35,8 @@ export const repoReducer = (
         ...state,
         loadMore: repositories.length < action.payload.total,
         nextPage: state.nextPage + 1,
-        repositories
+        repositories,
+        total: action.payload.total
       };
     }
     case ERepoActions.SetFilters:
@@ -43,6 +46,11 @@ export const repoReducer = (
         loadMore: false,
         nextPage: 1,
         repositories: []
+      }
+    case ERepoActions.HideLoadMore:
+      return {
+        ...state,
+        loadMore: false
       }
   }
 

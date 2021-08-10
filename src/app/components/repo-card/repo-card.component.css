@@ -12,12 +12,15 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
+  margin: 0;
   margin-bottom: .5em;
+  font-size: 1em;
+  color: inherit;
 }
 
 .repo__description {
   --max-lines: 3;
-  --line-hight: 1em;
+  --line-hight: 1.5em;
   position: relative;
   line-height: var(--line-hight);
   height: calc(var(--max-lines) * var(--line-hight));

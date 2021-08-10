@@ -11,6 +11,12 @@
   margin-left: 20em;
 }
 
+.repos__total {
+  text-align: right;
+  padding: 1em;
+  padding-bottom: 0;
+}
+
 .repos-filters {
   background: white;  
   box-shadow: 0 0 3px #aaa;

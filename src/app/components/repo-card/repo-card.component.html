@@ -1,5 +1,7 @@
 <div class="repo">
-  <header class="repo__header" [title]="repo.name">{{ repo.name }}</header>
+  <h2 class="repo__header" [title]="repo.name">
+    <a [href]="repo.html_url" target="_blank" style="color: inherit;">{{ repo.name }}</a>
+  </h2>
   <div class="repo__description" [title]="repo.description || ''">{{ repo.description || noDescriptionText }}</div>
   <div class="repo__lang">{{ repo.language }}</div>
   <footer class="repo__footer">

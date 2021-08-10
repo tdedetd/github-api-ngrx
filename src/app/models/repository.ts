@@ -12,4 +12,5 @@ export interface Repository {
   open_issues?: number;
   watchers?: number;
   stargazers_count?: number;
+  html_url?: string;
 }

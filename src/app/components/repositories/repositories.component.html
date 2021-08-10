@@ -5,11 +5,13 @@
     </div>
   </div>
   <div class="repos__result">
+    <div class="repos__total">Записей найдено: {{ total$ | async }}</div>
     <ul class="repos-list">
       <li *ngFor="let repo of repos$ | async" class="repos-list__item">
         <gan-repo-card [repo]="repo"></gan-repo-card>
       </li>
     </ul>
+    <div *ngIf="loading" class="load-more-container">Загрузка...</div>
     <div *ngIf="loadMore$ | async" class="load-more-container">
       <button class="load-more-container__btn" (click)="onLoadMoreButtonClick()">Load more</button>
     </div>
