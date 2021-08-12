@@ -7,12 +7,12 @@ const selectRepo = (state: AppState) => state.repo;
 
 export const selectLoadMore = createSelector(
   selectRepo,
-  (state: RepoState) => state.loadMore
+  (state: RepoState) => state.repositories.loadMore
 );
 
 export const selectRepositories = createSelector(
   selectRepo,
-  (state: RepoState) => state.repositories
+  (state: RepoState) => state.repositories.list
 );
 
 export const selectFilters = createSelector(
@@ -22,5 +22,5 @@ export const selectFilters = createSelector(
 
 export const selectTotal = createSelector(
   selectRepo,
-  (state: RepoState) => state.total
+  (state: RepoState) => state.repositories.total
 );

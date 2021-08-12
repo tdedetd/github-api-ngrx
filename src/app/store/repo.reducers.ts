@@ -4,11 +4,13 @@ import { ERepoActions, RepoActions } from "./repo.actions";
 
 export interface RepoState {
   filters: SearchReposFilters,
-  loadMore: boolean;
-  nextPage: number;
-  perPage: number;
-  repositories: Repository[];
-  total: number;
+  repositories: {
+    list: Repository[];
+    loadMore: boolean;
+    nextPage: number;
+    perPage: number;
+    total: number;
+  }
 }
 
 export const initialRepoState: RepoState = {
@@ -17,11 +19,13 @@ export const initialRepoState: RepoState = {
     sort: '',
     order: 'desc'
   },
-  loadMore: false,
-  nextPage: 1,
-  perPage: 30,
-  repositories: [],
-  total: 0
+  repositories: {
+    loadMore: false,
+    nextPage: 1,
+    perPage: 30,
+    list: [],
+    total: 0
+  },
 };
 
 export const repoReducer = (
@@ -30,28 +34,37 @@ export const repoReducer = (
 ): RepoState => {
   switch (action.type) {
     case ERepoActions.LoadRepositoriesSuccess: {
-      const repositories = [...state.repositories, ...action.payload.repos];
+      const repositories = [...state.repositories.list, ...action.payload.repos];
       return {
         ...state,
-        loadMore: repositories.length < action.payload.total,
-        nextPage: state.nextPage + 1,
-        repositories,
-        total: action.payload.total
+        repositories: {
+          ...state.repositories,
+          list: repositories,
+          loadMore: repositories.length < action.payload.total,
+          nextPage: state.repositories.nextPage + 1,
+          total: action.payload.total
+        }
       };
     }
     case ERepoActions.SetFilters:
       return {
         ...state,
         filters: action.payload,
-        loadMore: false,
-        nextPage: 1,
-        repositories: []
-      }
+        repositories: {
+          ...state.repositories,
+          list: [],
+          loadMore: false,
+          nextPage: 1,
+        }
+      };
     case ERepoActions.HideLoadMore:
       return {
         ...state,
-        loadMore: false
-      }
+        repositories: {
+          ...state.repositories,
+          loadMore: false
+        }
+      };
   }
 
   return state;

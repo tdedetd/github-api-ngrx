@@ -29,8 +29,8 @@ export class RepoEffects {
         q: repoState.filters.query,
         sort: repoState.filters.sort,
         order: repoState.filters.order,
-        per_page: repoState.perPage,
-        page: repoState.nextPage
+        per_page: repoState.repositories.perPage,
+        page: repoState.repositories.nextPage
       })
     }),
     map(data => new LoadRepositoriesSuccess({ repos: data.items, total: data.total_count }))
