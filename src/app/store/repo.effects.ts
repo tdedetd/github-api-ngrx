@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { of } from "rxjs";
-import { map, switchMap, withLatestFrom } from "rxjs/operators";
+import { iif, of } from "rxjs";
+import { map, mergeMap, withLatestFrom } from "rxjs/operators";
 
 import { AppState } from ".";
 import { SearchRepoResponse } from "../models/search-repo-response";
@@ -13,26 +13,35 @@ import { ERepoActions, LoadRepositories, LoadRepositoriesSuccess } from "./repo.
 export class RepoEffects {
 
   laodRepositories$ = createEffect(() => this.actions$.pipe(
+    // Отфильтровыаем по типу действия
     ofType(ERepoActions.LoadRepositories),
+
+    // Вызываем текущее состояние
     withLatestFrom(this.store$),
+
+    // Принимаем на вход кортеж из действия и состояния. Действие полезной нагржузки не имеет, оно нам в дальнейшем не нужно
     map(([_, state]) => state.repo),
-    switchMap(repoState => {
-      if (!repoState.filters.query) {
-        return of({
+
+    // Проверяем наличие заполенной строки запроса. Если строка пустая, возвращаем пустые данные.
+    mergeMap(repoState =>
+      iif(
+        () => !!repoState.filters.query,
+        this.github.getRepositories({
+          q: repoState.filters.query,
+          sort: repoState.filters.sort,
+          order: repoState.filters.order,
+          per_page: repoState.repositories.perPage,
+          page: repoState.repositories.nextPage
+        }),
+        of({
           incomplete_results: false,
           items: [],
           total_count: 0
-        } as SearchRepoResponse);
-      }
+        } as SearchRepoResponse),
+      )
+    ),
 
-      return this.github.getRepositories({
-        q: repoState.filters.query,
-        sort: repoState.filters.sort,
-        order: repoState.filters.order,
-        per_page: repoState.repositories.perPage,
-        page: repoState.repositories.nextPage
-      })
-    }),
+    // Возвращаем действие, парадаем туда полученные данные
     map(data => new LoadRepositoriesSuccess({ repos: data.items, total: data.total_count }))
   ));
 

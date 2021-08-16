@@ -42,7 +42,7 @@ export class RepositoriesComponent implements OnInit {
 
   onFiltersChange(filters: SearchReposFilters) {
     this.loading = true;
-    this.store.dispatch(new HideLoadMore());
+    this.hideLoadMore();
     this.store.dispatch(new SetFilters(filters));
   }
 
@@ -50,10 +50,13 @@ export class RepositoriesComponent implements OnInit {
     this.loadRepos();
   }
 
-  private loadRepos() {
-    this.loading = true;
+  private hideLoadMore() {
     this.store.dispatch(new HideLoadMore());
-    this.store.dispatch(new LoadRepositories());
   }
 
+  private loadRepos() {
+    this.loading = true;
+    this.hideLoadMore();
+    this.store.dispatch(new LoadRepositories());
+  }
 }
